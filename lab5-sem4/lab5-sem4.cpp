@@ -1,7 +1,8 @@
 ﻿#include <fstream>
 #include <iostream>
 #include <string>
-
+#include "Bookkeeper.h"
+// задание 1
 int countOccurrences(const std::string& filename, const std::string& target) {
     std::ifstream file(filename);
     if (!file.is_open()) {
@@ -21,7 +22,6 @@ int countOccurrences(const std::string& filename, const std::string& target) {
 
     return count;
 }
-
 void testCountOccurences() {
     const std::string filename = "text.txt";
     const std::string target = "hello";
@@ -35,9 +35,26 @@ void testCountOccurences() {
     std::cout << "Кол-во появлений \"" << target << "\" в \"" << filename << "\": "
         << count << std::endl;
 }
+// задание 3
+void testBookkeeper() {
+    const std::string filename = "books.txt";
+    std::vector<Bookkeeper::Book> books = Bookkeeper::readBooksFromFile(filename);
+
+    // Добавление новой книги
+    Bookkeeper::addBook(books, 10, "Новый автор", "Новое название", 500);
+
+    // Запись обновленного каталога в файл
+    Bookkeeper::writeBooksToFile(filename, books);
+
+    // Вывод всех записей
+    Bookkeeper::printBooks(books);
+}
 
 int main() {
     setlocale(LC_ALL, "rus");
+    //copyright by Aiacaxapa & stanislavmedved
+    system("start copyright.mp4");
     testCountOccurences();
+    testBookkeeper();
     return 0;
 }
